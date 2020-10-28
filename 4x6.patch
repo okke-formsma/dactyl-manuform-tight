@@ -1,30 +1,37 @@
 diff --git a/src/dactyl_keyboard/dactyl.clj b/src/dactyl_keyboard/dactyl.clj
-index d8861fb..e58302f 100644
+index fc59f1f..93a0934 100644
 --- a/src/dactyl_keyboard/dactyl.clj
 +++ b/src/dactyl_keyboard/dactyl.clj
-@@ -13,13 +13,13 @@
- ;; Shape parameters ;;
+@@ -12,12 +12,12 @@
  ;;;;;;;;;;;;;;;;;;;;;;
  
--(def nrows 4)
+ (def nrows 4)
 -(def ncols 5)
-+(def nrows 4)
 +(def ncols 6)
  
- (def α (/ π 12))                        ; curvature of the columns
- (def β (/ π 36))                        ; curvature of the rows
- (def centerrow (- nrows 3))             ; controls front-back tilt
--(def centercol 3)                       ; controls left-right tilt / tenting (higher number is more tenting)
-+(def centercol 2)                       ; controls left-right tilt / tenting (higher number is more tenting)
- (def tenting-angle (/ π 12))            ; or, change this for more precise tenting control
- (def column-style 
-   (if (> nrows 5) :orthographic :standard))  ; options include :standard, :orthographic, and :fixed
-@@ -32,7 +32,7 @@
+ (def column-curvature (deg2rad 17))                         ; 15                        ; curvature of the columns
+ (def row-curvature (deg2rad 6))                             ; 5                   ; curvature of the rows
+ (def centerrow 1.75)                              ; controls front-back tilt
+-(def centercol 3)                                           ; controls left-right tilt / tenting (higher number is more tenting)
++(def centercol 2)                                           ; controls left-right tilt / tenting (higher number is more tenting)
+ (def tenting-angle (deg2rad 15))                            ; or, change this for more precise tenting control
+ (def column-style
+   (if (> nrows 5) :orthographic :standard))
+@@ -29,7 +29,7 @@
  
- (def thumb-offsets [6 -3 7])
+ (def thumb-offsets [10 -5 1])
  
--(def keyboard-z-offset 9)               ; controls overall height; original=9 with centercol=3; use 16 for centercol=2
-+(def keyboard-z-offset 16)              ; controls overall height; original=9 with centercol=3; use 16 for centercol=2
+-(def keyboard-z-offset 7)                                   ; controls overall height; original=9 with centercol=3; use 16 for centercol=2
++(def keyboard-z-offset 16)                                   ; controls overall height; original=9 with centercol=3; use 16 for centercol=2
+ (def bottom-height 2)                                    ; plexiglass plate or printed plate
+ (def extra-width 3)                                       ; extra space between the base of keys; original= 2
+ (def extra-height -0.5)                                      ; original= 0.5
+@@ -548,7 +548,7 @@
+ (def usb-holder (mirror [-1 0 0]
+                     (import "../things/holder v8.stl")))
  
- (def extra-width 2.5)                   ; extra space between the base of keys; original= 2
- (def extra-height 1.0)                  ; original= 0.5
+-(def usb-holder (translate [-40.8 45.5 bottom-height] usb-holder))
++(def usb-holder (translate [-22 45.5 bottom-height] usb-holder))
+ (def usb-holder-space
+   (translate [0 0 (/ (+  bottom-height 8.2) 2)]
+   (extrude-linear {:height (+ bottom-height 8.2) :twist 0 :convexity 0}
