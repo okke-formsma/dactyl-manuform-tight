@@ -12,7 +12,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;
 
 (def nrows 4)
-(def ncols 6)
+(def ncols 5)
 
 (def column-curvature (deg2rad 17))                         ; 15                        ; curvature of the columns
 (def row-curvature (deg2rad 6))                             ; 5                   ; curvature of the rows
@@ -528,7 +528,7 @@
          (screw-insert 0 1 bottom-radius top-radius height [-5.3 -8 bottom-height]) ; left
          (screw-insert 0 lastrow bottom-radius top-radius height [-12 -7 bottom-height]) ;thumb
          (screw-insert (- lastcol 1) lastrow bottom-radius top-radius height [10 13.5 bottom-height]) ; bottom right
-         (screw-insert (- lastcol 1) 0 bottom-radius top-radius height [10 5 bottom-height]) ; top right
+         (screw-insert (- lastcol 1) 0 bottom-radius top-radius height [7 5 bottom-height]) ; top right
          (screw-insert 2 (+ lastrow 1) bottom-radius top-radius height [0 6.5 bottom-height]))) ;bottom middle
 
 ; Hole Depth Y: 4.4
@@ -679,4 +679,3 @@
                          bottom-wall-usb-holder
                          thumb-space-below
                          (screw-insert-all-shapes 1 1 50)))))))
-

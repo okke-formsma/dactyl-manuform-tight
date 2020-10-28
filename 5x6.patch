@@ -1,8 +1,8 @@
 diff --git a/src/dactyl_keyboard/dactyl.clj b/src/dactyl_keyboard/dactyl.clj
-index d8861fb..e58302f 100644
+index fc59f1f..5cf0c42 100644
 --- a/src/dactyl_keyboard/dactyl.clj
 +++ b/src/dactyl_keyboard/dactyl.clj
-@@ -13,13 +13,13 @@
+@@ -11,13 +11,13 @@
  ;; Shape parameters ;;
  ;;;;;;;;;;;;;;;;;;;;;;
  
@@ -11,20 +11,42 @@ index d8861fb..e58302f 100644
 +(def nrows 5)
 +(def ncols 6)
  
- (def α (/ π 12))                        ; curvature of the columns
- (def β (/ π 36))                        ; curvature of the rows
- (def centerrow (- nrows 3))             ; controls front-back tilt
--(def centercol 3)                       ; controls left-right tilt / tenting (higher number is more tenting)
-+(def centercol 2)                       ; controls left-right tilt / tenting (higher number is more tenting)
- (def tenting-angle (/ π 12))            ; or, change this for more precise tenting control
- (def column-style 
-   (if (> nrows 5) :orthographic :standard))  ; options include :standard, :orthographic, and :fixed
-@@ -32,7 +32,7 @@
+ (def column-curvature (deg2rad 17))                         ; 15                        ; curvature of the columns
+ (def row-curvature (deg2rad 6))                             ; 5                   ; curvature of the rows
+ (def centerrow 1.75)                              ; controls front-back tilt
+-(def centercol 3)                                           ; controls left-right tilt / tenting (higher number is more tenting)
++(def centercol 2)                                           ; controls left-right tilt / tenting (higher number is more tenting)
+ (def tenting-angle (deg2rad 15))                            ; or, change this for more precise tenting control
+ (def column-style
+   (if (> nrows 5) :orthographic :standard))
+@@ -29,7 +29,7 @@
  
- (def thumb-offsets [6 -3 7])
+ (def thumb-offsets [10 -5 1])
  
--(def keyboard-z-offset 9)               ; controls overall height; original=9 with centercol=3; use 16 for centercol=2
-+(def keyboard-z-offset 16)              ; controls overall height; original=9 with centercol=3; use 16 for centercol=2
+-(def keyboard-z-offset 7)                                   ; controls overall height; original=9 with centercol=3; use 16 for centercol=2
++(def keyboard-z-offset 10)                                   ; controls overall height; original=9 with centercol=3; use 16 for centercol=2
+ (def bottom-height 2)                                    ; plexiglass plate or printed plate
+ (def extra-width 3)                                       ; extra space between the base of keys; original= 2
+ (def extra-height -0.5)                                      ; original= 0.5
+@@ -527,9 +527,9 @@
+   (union (screw-insert 2 0 bottom-radius top-radius height [-4 4.5 bottom-height]) ; top middle
+          (screw-insert 0 1 bottom-radius top-radius height [-5.3 -8 bottom-height]) ; left
+          (screw-insert 0 lastrow bottom-radius top-radius height [-12 -7 bottom-height]) ;thumb
+-         (screw-insert (- lastcol 1) lastrow bottom-radius top-radius height [10 13.5 bottom-height]) ; bottom right
+-         (screw-insert (- lastcol 1) 0 bottom-radius top-radius height [7 5 bottom-height]) ; top right
+-         (screw-insert 2 (+ lastrow 1) bottom-radius top-radius height [0 6.5 bottom-height]))) ;bottom middle
++         (screw-insert (- lastcol 1) lastrow bottom-radius top-radius height [10 13 bottom-height]) ; bottom right
++         (screw-insert (- lastcol 1) 0 bottom-radius top-radius height [10 5 bottom-height]) ; top right
++         (screw-insert 2 (+ lastrow 1) bottom-radius top-radius height [0 3.5 bottom-height]))) ;bottom middle
  
- (def extra-width 2.5)                   ; extra space between the base of keys; original= 2
- (def extra-height 1.0)                  ; original= 0.5
+ ; Hole Depth Y: 4.4
+ (def screw-insert-height 4)
+@@ -548,7 +548,7 @@
+ (def usb-holder (mirror [-1 0 0]
+                     (import "../things/holder v8.stl")))
+ 
+-(def usb-holder (translate [-40.8 45.5 bottom-height] usb-holder))
++(def usb-holder (translate [-22 45.5 bottom-height] usb-holder))
+ (def usb-holder-space
+   (translate [0 0 (/ (+  bottom-height 8.2) 2)]
+   (extrude-linear {:height (+ bottom-height 8.2) :twist 0 :convexity 0}
